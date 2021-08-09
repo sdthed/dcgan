@@ -1,5 +1,5 @@
 import torch
-from utils import preview
+from .utils import preview
 
 
 def train_step(i, data, netG, netD, optimizerG, optimizerD, criterion, c):
@@ -78,6 +78,4 @@ def train(dataloader, netG, netD, optimizerG, optimizerD, criterion, c):
                 noise = torch.randn(c.BATCH_SIZE, c.N_Z, 1, 1, device=c.DEVICE)
                 fake = netG(noise).detach().cpu()
                 preview(fake)
-            if i % 50 == 0 and i != 0:
-                break
         break
