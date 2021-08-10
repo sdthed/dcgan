@@ -41,9 +41,14 @@ def preview(batch):
 
 def init_weights(m):
     classname = m.__class__.__name__
-    if classname.find("Conv") != -1:
+    print(classname, end=" ")
+    if "Block" in classname:
+        pass
+    # elif classname.find("Conv") != -1:
+    elif "Conv" in classname:
         nn.init.normal_(m.weight.data, 0.0, 0.02)
-    elif classname.find("BatchNorm") != -1:
+    # elif classname.find("BatchNorm") != -1:
+    elif "BatchNorm" in classname:
         nn.init.normal_(m.weight.data, 1.0, 0.02)
         nn.init.constant_(m.bias.data, 0)
 
@@ -66,10 +71,10 @@ class Config:
     BATCH_SIZE = 128
     N_EPOCHS = 5
 
-    IM_SIZE = 64
+    IM_SIZE = 64  # 64
     N_CHAN = 3
     N_Z = 100  # size of z latent vector
-    N_GF = 64  # size of feature maps in generator
+    N_GF = 64  # 64  # size of feature maps in generator
     N_DF = 64  # size of feature maps in discriminator
 
     LEARNING_RATE = 0.0002

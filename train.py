@@ -9,7 +9,6 @@ def train_step(i, data, netG, netD, optimizerG, optimizerD, criterion, c):
     # Format batch
     real_cpu = data[0].to(c.DEVICE)
     b_size = real_cpu.size(0)
-    print("b size", b_size)
     label = torch.full((b_size,), c.real_label, dtype=torch.float, device=c.DEVICE)
     # Forward pass real batch through Discriminator
     output = netD(real_cpu).view(-1)
@@ -69,12 +68,12 @@ def train(dataloader, netG, netD, optimizerG, optimizerD, criterion, c):
                 i, data, netG, netD, optimizerG, optimizerD, criterion, c
             )
 
-            if i % 1 == 0:
+            if i % 10 == 0:
                 print_stats(
                     e, c.N_EPOCHS, i, len(dataloader), errD, errG, D_x, D_G_z1, D_G_z2
                 )
 
-            if i % 10 == 0 and i != 0:
+            if i % 200 == 0 and i != 0:
                 noise = torch.randn(c.BATCH_SIZE, c.N_Z, 1, 1, device=c.DEVICE)
                 fake = netG(noise).detach().cpu()
                 preview(fake)
