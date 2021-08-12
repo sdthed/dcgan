@@ -1,0 +1,8 @@
+.DS_Store
+data
+.ipynb_checkpoints
+kaggle-env
+kaggle.json
+*.swp
+*.swo
+__pycache__
